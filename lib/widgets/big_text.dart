@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 
 class BigText extends StatelessWidget {
-  final Color? color;
+  Color? color;
   final String text;
   double size;
   TextOverflow overflow;
 
   BigText(
       {super.key,
-      required this.color,
+      this.color = const Color(0xFF332d2d),
       required this.text,
       this.size = 20,
       this.overflow = TextOverflow.ellipsis});
@@ -19,7 +19,10 @@ class BigText extends StatelessWidget {
       text,
       overflow: overflow,
       style: TextStyle(
-          fontFamily: 'Roboto', color: color, fontWeight: FontWeight.w400),
+          fontFamily: 'Roboto',
+          color: color,
+          fontSize: size,
+          fontWeight: FontWeight.w400),
     );
   }
 }

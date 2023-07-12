@@ -1,4 +1,5 @@
 import 'package:eccommerce/utils/app_colors.dart';
+import 'package:eccommerce/widgets/big_text.dart';
 import 'package:flutter/material.dart';
 
 class MainFoodPage extends StatefulWidget {
@@ -22,7 +23,7 @@ class _MainFoodPageState extends State<MainFoodPage> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Column(
-                    children: [Text("Country"), Text("City")],
+                    children: [BigText(text: "Manhattan")],
                   ),
                   Center(
                     child: Container(
