@@ -1,4 +1,4 @@
-# eccomerce
+# eccommerce
 
 A new Flutter project.
 
