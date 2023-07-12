@@ -1,5 +1,7 @@
+import 'package:eccommerce/home/food_page_body.dart';
 import 'package:eccommerce/utils/app_colors.dart';
 import 'package:eccommerce/widgets/big_text.dart';
+import 'package:eccommerce/widgets/small_text.dart';
 import 'package:flutter/material.dart';
 
 class MainFoodPage extends StatefulWidget {
@@ -23,7 +25,21 @@ class _MainFoodPageState extends State<MainFoodPage> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Column(
-                    children: [BigText(text: "Manhattan")],
+                    children: [
+                      BigText(
+                        text: "Colombia",
+                        color: AppColors.mainColor,
+                      ),
+                      Row(
+                        children: [
+                          SmallText(
+                            text: "Bogota",
+                            color: Colors.black54,
+                          ),
+                          Icon(Icons.arrow_drop_down_rounded)
+                        ],
+                      )
+                    ],
                   ),
                   Center(
                     child: Container(
@@ -38,7 +54,8 @@ class _MainFoodPageState extends State<MainFoodPage> {
                 ],
               ),
             ),
-          )
+          ),
+          const FoodPageBody(),
         ],
       ),
     );
