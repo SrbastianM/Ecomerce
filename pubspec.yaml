@@ -1,5 +1,5 @@
 name: eccommerce
-description: A new Flutter project.
+description: Eccomerce based in a design found in pinterest
 
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
@@ -74,7 +74,7 @@ flutter:
   # list giving the asset and other descriptors for the font. For
   # example:
   assets:
-    - asset/image/
+    - asset/images/
   fonts:
     - family: Roboto
       fonts:
