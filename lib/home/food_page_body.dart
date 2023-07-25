@@ -1,3 +1,4 @@
+import 'package:dots_indicator/dots_indicator.dart';
 import 'package:eccommerce/utils/app_colors.dart';
 import 'package:eccommerce/widgets/big_text.dart';
 import 'package:eccommerce/widgets/icon_and_text.dart';
@@ -35,15 +36,30 @@ class _FoodPageBodyState extends State<FoodPageBody> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 320,
-      child: PageView.builder(
-        controller: pageController,
-        itemCount: 5,
-        itemBuilder: ((context, index) {
-          return _buildPageItem(index);
-        }),
-      ),
+    return Column(
+      children: [
+        Container(
+          height: 320,
+          child: PageView.builder(
+            controller: pageController,
+            itemCount: 5,
+            itemBuilder: ((context, index) {
+              return _buildPageItem(index);
+            }),
+          ),
+        ),
+        new DotsIndicator(
+          dotsCount: 5,
+          position: _currPageVal,
+          decorator: DotsDecorator(
+            color: AppColors.mainColor,
+            size: const Size.square(9.0),
+            activeSize: const Size(18.0, 9.0),
+            activeShape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(5.0)),
+          ),
+        ),
+      ],
     );
   }
 
@@ -82,8 +98,23 @@ class _FoodPageBodyState extends State<FoodPageBody> {
             height: 220,
             margin: EdgeInsets.only(left: 5, right: 5),
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(30),
+              borderRadius: BorderRadius.circular(20),
               color: index.isEven ? Color(0xFF69c5df) : Color(0xFF9294cc),
+              boxShadow: [
+                BoxShadow(
+                  color: Color(0xFFe8e8e8),
+                  blurRadius: 5.0,
+                  offset: Offset(0, 5),
+                ),
+                BoxShadow(
+                  color: Colors.white,
+                  offset: Offset(-5, 0),
+                ),
+                BoxShadow(
+                  color: Colors.white,
+                  offset: Offset(5, 0),
+                ),
+              ],
               image: const DecorationImage(
                   fit: BoxFit.cover, image: AssetImage("asset/images/s.png")),
             ),
