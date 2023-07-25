@@ -4,13 +4,11 @@ import 'package:flutter/material.dart';
 class IconAndText extends StatelessWidget {
   final IconData icon;
   final String text;
-  final Color color;
   final Color iconColor;
   const IconAndText(
       {super.key,
       required this.icon,
       required this.text,
-      required this.color,
       required this.iconColor});
 
   @override
@@ -26,7 +24,6 @@ class IconAndText extends StatelessWidget {
         ),
         SmallText(
           text: text,
-          color: color,
         )
       ],
     );
