@@ -1,5 +1,6 @@
 import 'package:eccommerce/utils/app_colors.dart';
 import 'package:eccommerce/widgets/big_text.dart';
+import 'package:eccommerce/widgets/icon_and_text.dart';
 import 'package:eccommerce/widgets/small_text.dart';
 import 'package:flutter/material.dart';
 
@@ -12,6 +13,19 @@ class FoodPageBody extends StatefulWidget {
 
 class _FoodPageBodyState extends State<FoodPageBody> {
   PageController pageController = PageController(viewportFraction: 0.85);
+  var _currPageVal = 0.0;
+
+  @override
+  void initState() {
+    super.initState();
+    setState(() {
+      pageController.addListener(() {
+        _currPageVal = pageController.page!;
+        print("current Value is" + _currPageVal.toString());
+      });
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -87,7 +101,24 @@ class _FoodPageBodyState extends State<FoodPageBody> {
                     height: 20,
                   ),
                   Row(
-                    children: [],
+                    children: [
+                      Row(
+                        children: [
+                          IconAndText(
+                              icon: Icons.circle_sharp,
+                              text: "Normal",
+                              iconColor: AppColors.iconColor1),
+                          IconAndText(
+                              icon: Icons.location_on,
+                              text: "1.7 km",
+                              iconColor: AppColors.mainColor),
+                          IconAndText(
+                              icon: Icons.access_time_rounded,
+                              text: "32 min",
+                              iconColor: AppColors.iconColor2)
+                        ],
+                      )
+                    ],
                   ),
                 ],
               ),
