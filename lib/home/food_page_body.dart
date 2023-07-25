@@ -169,6 +169,7 @@ class _FoodPageBodyState extends State<FoodPageBody> {
                     Row(
                       children: [
                         Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             IconAndText(
                                 icon: Icons.circle_sharp,
