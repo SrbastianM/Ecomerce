@@ -1,5 +1,6 @@
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:eccommerce/utils/app_colors.dart';
+import 'package:eccommerce/utils/dimensions.dart';
 import 'package:eccommerce/widgets/big_text.dart';
 import 'package:eccommerce/widgets/icon_and_text.dart';
 import 'package:eccommerce/widgets/small_text.dart';
@@ -16,7 +17,7 @@ class _FoodPageBodyState extends State<FoodPageBody> {
   PageController pageController = PageController(viewportFraction: 0.8);
   var _currPageVal = 0.0;
   double _scaleFactor = 0.8;
-  double _height = 320;
+  double _height = Dimensions.pageViewContainer;
 
   @override
   void initState() {
@@ -38,10 +39,11 @@ class _FoodPageBodyState extends State<FoodPageBody> {
 
   @override
   Widget build(BuildContext context) {
+    print("Height is " + MediaQuery.of(context).size.height.toString());
     return Column(
       children: [
         Container(
-          height: 320,
+          height: Dimensions.pageView,
           child: PageView.builder(
             controller: pageController,
             itemCount: 5,
@@ -97,14 +99,14 @@ class _FoodPageBodyState extends State<FoodPageBody> {
       child: Stack(
         children: [
           Container(
-            height: 220,
+            height: Dimensions.pageViewContainer,
             margin: EdgeInsets.only(left: 5, right: 5),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(20),
               color: index.isEven ? Color(0xFF69c5df) : Color(0xFF9294cc),
               boxShadow: const [
                 BoxShadow(
-                  color: Color(0xFFe8e8e8),
+                  color: Color(0xFFD9BFF3),
                   blurRadius: 5.0,
                   offset: Offset(0, 5),
                 ),
@@ -118,16 +120,33 @@ class _FoodPageBodyState extends State<FoodPageBody> {
                 ),
               ],
               image: const DecorationImage(
-                  fit: BoxFit.cover, image: AssetImage("asset/images/s.png")),
+                fit: BoxFit.cover,
+                image: AssetImage("asset/images/s.png"),
+              ),
             ),
           ),
           Align(
             alignment: Alignment.bottomCenter,
             child: Container(
-              height: 140,
+              height: Dimensions.pageViewTextContainer,
               margin: EdgeInsets.only(left: 25, right: 25, bottom: 15),
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(30),
+                borderRadius: BorderRadius.circular(20),
+                boxShadow: const [
+                  BoxShadow(
+                    color: Color(0xFFe8e8ee8),
+                    blurRadius: 5.0,
+                    offset: Offset(0, 5),
+                  ),
+                  BoxShadow(
+                    color: Colors.white,
+                    offset: Offset(-5, 0),
+                  ),
+                  BoxShadow(
+                    color: Colors.white,
+                    offset: Offset(5, 0),
+                  )
+                ],
                 color: Colors.white,
               ),
               child: Container(
@@ -166,7 +185,7 @@ class _FoodPageBodyState extends State<FoodPageBody> {
                       ],
                     ),
                     SizedBox(
-                      height: 30,
+                      height: 20,
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
