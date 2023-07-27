@@ -39,6 +39,7 @@ class _FoodPageBodyState extends State<FoodPageBody> {
   Widget build(BuildContext context) {
     return Column(
       children: [
+        //Slider Section
         Container(
           height: Dimensions.pageView,
           child: PageView.builder(
@@ -49,7 +50,8 @@ class _FoodPageBodyState extends State<FoodPageBody> {
             }),
           ),
         ),
-        new DotsIndicator(
+        // Dots
+        DotsIndicator(
           dotsCount: 5,
           position: _currPageVal,
           decorator: DotsDecorator(
@@ -58,6 +60,36 @@ class _FoodPageBodyState extends State<FoodPageBody> {
             activeSize: const Size(18.0, 9.0),
             activeShape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(Dimensions.radius20)),
+          ),
+        ),
+        // Popular Food :D Section'll be made here an a few hours
+        SizedBox(
+          height: Dimensions.height30,
+        ),
+        Container(
+          margin: EdgeInsets.only(left: Dimensions.width30),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children: [
+              BigText(text: "Testing Text"),
+              SizedBox(
+                width: Dimensions.width10,
+              ),
+              Container(
+                margin: const EdgeInsets.only(bottom: 3),
+                child: BigText(
+                  text: ".",
+                  color: Colors.black26,
+                ),
+              ),
+              SizedBox(
+                width: Dimensions.width10,
+              ),
+              Container(
+                margin: const EdgeInsets.only(bottom: 2),
+                child: SmallText(text: "Sexy text"),
+              )
+            ],
           ),
         ),
       ],
