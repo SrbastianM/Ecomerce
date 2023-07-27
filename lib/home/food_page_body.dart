@@ -40,7 +40,7 @@ class _FoodPageBodyState extends State<FoodPageBody> {
     return Column(
       children: [
         Container(
-          height: 320,
+          height: Dimensions.pageView,
           child: PageView.builder(
             controller: pageController,
             itemCount: 5,
@@ -196,24 +196,20 @@ class _FoodPageBodyState extends State<FoodPageBody> {
                       height: Dimensions.height20,
                     ),
                     Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            IconAndText(
-                                icon: Icons.circle_sharp,
-                                text: "Normal",
-                                iconColor: AppColors.iconColor1),
-                            IconAndText(
-                                icon: Icons.location_on,
-                                text: "1.7 km",
-                                iconColor: AppColors.mainColor),
-                            IconAndText(
-                                icon: Icons.access_time_rounded,
-                                text: "32 min",
-                                iconColor: AppColors.iconColor2)
-                          ],
-                        )
+                        IconAndText(
+                            icon: Icons.circle_sharp,
+                            text: "Normal",
+                            iconColor: AppColors.iconColor1),
+                        IconAndText(
+                            icon: Icons.location_on,
+                            text: "1.7 km",
+                            iconColor: AppColors.mainColor),
+                        IconAndText(
+                            icon: Icons.access_time_rounded,
+                            text: "32 min",
+                            iconColor: AppColors.iconColor2)
                       ],
                     ),
                   ],
