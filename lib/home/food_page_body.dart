@@ -14,36 +14,33 @@ class FoodPageBody extends StatefulWidget {
 }
 
 class _FoodPageBodyState extends State<FoodPageBody> {
-  PageController pageController = PageController(viewportFraction: 0.8);
+  PageController pageController = PageController(viewportFraction: 0.85);
   var _currPageVal = 0.0;
   double _scaleFactor = 0.8;
-  double _height = Dimensions.pageViewContainer;
+  double _height = 220;
 
   @override
   void initState() {
     super.initState();
-    pageController.addListener(() {
-      setState(() {
+    setState(() {
+      pageController.addListener(() {
         _currPageVal = pageController.page!;
-        print(_currPageVal);
-        print(pageController.page);
+        print("current Value is" + _currPageVal.toString());
       });
     });
   }
 
   @override
   void dispose() {
-    super.dispose();
     pageController.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    print("Height is " + MediaQuery.of(context).size.height.toString());
     return Column(
       children: [
         Container(
-          height: Dimensions.pageView,
+          height: 320,
           child: PageView.builder(
             controller: pageController,
             itemCount: 5,
@@ -52,7 +49,7 @@ class _FoodPageBodyState extends State<FoodPageBody> {
             }),
           ),
         ),
-        DotsIndicator(
+        new DotsIndicator(
           dotsCount: 5,
           position: _currPageVal,
           decorator: DotsDecorator(
@@ -60,7 +57,7 @@ class _FoodPageBodyState extends State<FoodPageBody> {
             size: const Size.square(9.0),
             activeSize: const Size(18.0, 9.0),
             activeShape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(5.0)),
+                borderRadius: BorderRadius.circular(Dimensions.radius20)),
           ),
         ),
       ],
@@ -69,7 +66,7 @@ class _FoodPageBodyState extends State<FoodPageBody> {
 
   Widget _buildPageItem(int index) {
     // Matrix4 es para la animacion  del slider. recibe 3 cordenadas xyz
-    Matrix4 matrix = Matrix4.identity();
+    Matrix4 matrix = new Matrix4.identity();
     if (index == _currPageVal.floor()) {
       // esta ecuacion es solo real para el index actual.
       var currScale = 1 - (_currPageVal - index) * (1 - _scaleFactor);
@@ -99,14 +96,14 @@ class _FoodPageBodyState extends State<FoodPageBody> {
       child: Stack(
         children: [
           Container(
-            height: Dimensions.pageViewContainer,
+            height: 220,
             margin: EdgeInsets.only(left: 5, right: 5),
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(20),
+              borderRadius: BorderRadius.circular(Dimensions.radius20),
               color: index.isEven ? Color(0xFF69c5df) : Color(0xFF9294cc),
-              boxShadow: const [
+              boxShadow: [
                 BoxShadow(
-                  color: Color(0xFFD9BFF3),
+                  color: Color(0xFFe8e8e8),
                   blurRadius: 5.0,
                   offset: Offset(0, 5),
                 ),
@@ -128,35 +125,24 @@ class _FoodPageBodyState extends State<FoodPageBody> {
           Align(
             alignment: Alignment.bottomCenter,
             child: Container(
-              height: Dimensions.pageViewTextContainer,
+              height: 140,
               margin: EdgeInsets.only(left: 25, right: 25, bottom: 15),
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(20),
-                boxShadow: const [
-                  BoxShadow(
-                    color: Color(0xFFe8e8ee8),
-                    blurRadius: 5.0,
-                    offset: Offset(0, 5),
-                  ),
-                  BoxShadow(
-                    color: Colors.white,
-                    offset: Offset(-5, 0),
-                  ),
-                  BoxShadow(
-                    color: Colors.white,
-                    offset: Offset(5, 0),
-                  )
-                ],
+                borderRadius: BorderRadius.circular(Dimensions.radius30),
                 color: Colors.white,
               ),
               child: Container(
-                padding: EdgeInsets.only(top: 10, left: 15, right: 15),
+                padding: EdgeInsets.only(
+                  top: Dimensions.height10,
+                  left: Dimensions.height15,
+                  right: Dimensions.height15,
+                ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     BigText(text: "Testing text above"),
                     SizedBox(
-                      height: 10,
+                      height: Dimensions.height10,
                     ),
                     Row(
                       children: [
@@ -185,25 +171,29 @@ class _FoodPageBodyState extends State<FoodPageBody> {
                       ],
                     ),
                     SizedBox(
-                      height: 20,
+                      height: Dimensions.height20,
                     ),
                     Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
-                        IconAndText(
-                            icon: Icons.circle_sharp,
-                            text: "Normal",
-                            iconColor: AppColors.iconColor1),
-                        IconAndText(
-                            icon: Icons.location_on,
-                            text: "1.7 km",
-                            iconColor: AppColors.mainColor),
-                        IconAndText(
-                            icon: Icons.access_time_rounded,
-                            text: "32 min",
-                            iconColor: AppColors.iconColor2)
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            IconAndText(
+                                icon: Icons.circle_sharp,
+                                text: "Normal",
+                                iconColor: AppColors.iconColor1),
+                            IconAndText(
+                                icon: Icons.location_on,
+                                text: "1.7 km",
+                                iconColor: AppColors.mainColor),
+                            IconAndText(
+                                icon: Icons.access_time_rounded,
+                                text: "32 min",
+                                iconColor: AppColors.iconColor2)
+                          ],
+                        )
                       ],
-                    )
+                    ),
                   ],
                 ),
               ),
