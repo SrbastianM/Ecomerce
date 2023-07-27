@@ -13,24 +13,26 @@ class FoodPageBody extends StatefulWidget {
 }
 
 class _FoodPageBodyState extends State<FoodPageBody> {
-  PageController pageController = PageController(viewportFraction: 0.85);
+  PageController pageController = PageController(viewportFraction: 0.8);
   var _currPageVal = 0.0;
   double _scaleFactor = 0.8;
-  double _height = 220;
+  double _height = 320;
 
   @override
   void initState() {
     super.initState();
-    setState(() {
-      pageController.addListener(() {
+    pageController.addListener(() {
+      setState(() {
         _currPageVal = pageController.page!;
-        print("current Value is" + _currPageVal.toString());
+        print(_currPageVal);
+        print(pageController.page);
       });
     });
   }
 
   @override
   void dispose() {
+    super.dispose();
     pageController.dispose();
   }
 
@@ -48,7 +50,7 @@ class _FoodPageBodyState extends State<FoodPageBody> {
             }),
           ),
         ),
-        new DotsIndicator(
+        DotsIndicator(
           dotsCount: 5,
           position: _currPageVal,
           decorator: DotsDecorator(
@@ -65,7 +67,7 @@ class _FoodPageBodyState extends State<FoodPageBody> {
 
   Widget _buildPageItem(int index) {
     // Matrix4 es para la animacion  del slider. recibe 3 cordenadas xyz
-    Matrix4 matrix = new Matrix4.identity();
+    Matrix4 matrix = Matrix4.identity();
     if (index == _currPageVal.floor()) {
       // esta ecuacion es solo real para el index actual.
       var currScale = 1 - (_currPageVal - index) * (1 - _scaleFactor);
@@ -87,7 +89,7 @@ class _FoodPageBodyState extends State<FoodPageBody> {
     } else {
       var currScale = 0.8;
       matrix = Matrix4.diagonal3Values(1, currScale, 1)
-        ..setTranslationRaw(0, _height * (1 - _scaleFactor), 0);
+        ..setTranslationRaw(0, _height * (1 - _scaleFactor) / 2, 0);
     }
 
     return Transform(
@@ -100,7 +102,7 @@ class _FoodPageBodyState extends State<FoodPageBody> {
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(20),
               color: index.isEven ? Color(0xFF69c5df) : Color(0xFF9294cc),
-              boxShadow: [
+              boxShadow: const [
                 BoxShadow(
                   color: Color(0xFFe8e8e8),
                   blurRadius: 5.0,
@@ -164,29 +166,25 @@ class _FoodPageBodyState extends State<FoodPageBody> {
                       ],
                     ),
                     SizedBox(
-                      height: 20,
+                      height: 30,
                     ),
                     Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            IconAndText(
-                                icon: Icons.circle_sharp,
-                                text: "Normal",
-                                iconColor: AppColors.iconColor1),
-                            IconAndText(
-                                icon: Icons.location_on,
-                                text: "1.7 km",
-                                iconColor: AppColors.mainColor),
-                            IconAndText(
-                                icon: Icons.access_time_rounded,
-                                text: "32 min",
-                                iconColor: AppColors.iconColor2)
-                          ],
-                        )
+                        IconAndText(
+                            icon: Icons.circle_sharp,
+                            text: "Normal",
+                            iconColor: AppColors.iconColor1),
+                        IconAndText(
+                            icon: Icons.location_on,
+                            text: "1.7 km",
+                            iconColor: AppColors.mainColor),
+                        IconAndText(
+                            icon: Icons.access_time_rounded,
+                            text: "32 min",
+                            iconColor: AppColors.iconColor2)
                       ],
-                    ),
+                    )
                   ],
                 ),
               ),
