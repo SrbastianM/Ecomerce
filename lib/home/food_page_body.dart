@@ -96,7 +96,7 @@ class _FoodPageBodyState extends State<FoodPageBody> {
       child: Stack(
         children: [
           Container(
-            height: 220,
+            height: Dimensions.pageViewContainer,
             margin: EdgeInsets.only(
               left: Dimensions.width10,
               right: Dimensions.width10,
@@ -104,7 +104,7 @@ class _FoodPageBodyState extends State<FoodPageBody> {
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(Dimensions.radius20),
               color: index.isEven ? Color(0xFF69c5df) : Color(0xFF9294cc),
-              boxShadow: [
+              boxShadow: const [
                 BoxShadow(
                   color: Color(0xFFe8e8e8),
                   blurRadius: 5.0,
@@ -128,8 +128,12 @@ class _FoodPageBodyState extends State<FoodPageBody> {
           Align(
             alignment: Alignment.bottomCenter,
             child: Container(
-              height: 140,
-              margin: EdgeInsets.only(left: 25, right: 25, bottom: 15),
+              height: Dimensions.pageViewTextContainer,
+              margin: EdgeInsets.only(
+                left: Dimensions.width30,
+                right: Dimensions.width30,
+                bottom: Dimensions.height30,
+              ),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(Dimensions.radius30),
                 boxShadow: const [
