@@ -1,15 +1,15 @@
+import 'package:eccommerce/utils/app_colors.dart';
 import 'package:eccommerce/utils/dimensions.dart';
 import 'package:eccommerce/widgets/small_text.dart';
 import 'package:flutter/material.dart';
 
 class ExpandableText extends StatefulWidget {
   final String text;
-  final IconData icon;
+
   Color? color;
   ExpandableText({
     super.key,
     required this.text,
-    required this.icon,
   });
 
   @override
@@ -43,9 +43,42 @@ class _ExpandableTextState extends State<ExpandableText> {
     return Container(
       // Si la segunda mitad no tiene contenido, usamos la primera mitad. Si no pasamos un container.
       child: secondHalf.isEmpty
-          ? SmallText(text: firstHalf)
+          ? SmallText(
+              color: AppColors.paraColor,
+              size: Dimensions.font16,
+              text: firstHalf)
           : Column(
-              children: [],
+              children: [
+                SmallText(
+                  height: 1.8,
+                  color: AppColors.paraColor,
+                  size: Dimensions.font16,
+                  text: hiddenText
+                      ? (firstHalf + "...")
+                      : (firstHalf + secondHalf),
+                ),
+                InkWell(
+                  onTap: () {
+                    setState(() {
+                      hiddenText = !hiddenText;
+                    });
+                  },
+                  child: Row(
+                    children: [
+                      SmallText(
+                        text: "Show More",
+                        color: AppColors.mainColor,
+                      ),
+                      Icon(
+                        hiddenText
+                            ? Icons.arrow_drop_down
+                            : Icons.arrow_drop_up,
+                        color: AppColors.mainColor,
+                      ),
+                    ],
+                  ),
+                )
+              ],
             ),
     );
   }
