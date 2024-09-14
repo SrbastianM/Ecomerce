@@ -1,4 +1,5 @@
 import 'package:eccommerce/data/repository/popular_product_repo.dart';
+import 'package:eccommerce/models/products_model.dart';
 import 'package:get/get.dart';
 
 class PopularProductController extends GetxController {
@@ -11,7 +12,8 @@ class PopularProductController extends GetxController {
     Response response = await popularProductRepo.getPopularProductList();
     if (response.statusCode == 200) {
       _popularProductList = [];
-      _popularProductList.addAll();
+      _popularProductList.addAll(Product.fromJson(response.body).products);
+      update();
     } else {}
   }
 }
