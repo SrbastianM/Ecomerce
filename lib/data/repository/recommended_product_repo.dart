@@ -2,13 +2,13 @@ import 'package:eccommerce/data/api/api_client.dart';
 import 'package:eccommerce/utils/app_constants.dart';
 import 'package:get/get.dart';
 
-class PopularProductRepo extends GetxService {
+class RecommendedProductRepo extends GetxService {
   final ApiClient apiClient;
-  PopularProductRepo({
+  RecommendedProductRepo({
     required this.apiClient,
   });
 
-  Future<Response> getPopularProductList() async {
-    return await apiClient.getData(AppConstants.POPULAR_PRODUCT_URI);
+  Future<Response> getRecommendedProductList() async {
+    return await apiClient.getData(AppConstants.RECOMENDED_PRODUCT_URI);
   }
 }
