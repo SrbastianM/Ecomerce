@@ -34,9 +34,7 @@ class Product {
     data['total_size'] = _totalSize;
     data['type_id'] = _typeId;
     data['offset'] = _offset;
-    if (_products != null) {
-      data['products'] = _products!.map((v) => v.toJson()).toList();
-    }
+    data['products'] = _products.map((v) => v.toJson()).toList();
     return data;
   }
 }
@@ -47,7 +45,7 @@ class ProductsModel {
   String? description;
   int? price;
   int? stars;
-  String? img;
+  late String img;
   String? location;
   String? createdAt;
   String? updatedAt;
@@ -59,7 +57,7 @@ class ProductsModel {
       this.description,
       this.price,
       this.stars,
-      this.img,
+      required this.img,
       this.location,
       this.createdAt,
       this.updatedAt,

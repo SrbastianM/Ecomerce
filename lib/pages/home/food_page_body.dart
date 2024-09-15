@@ -33,8 +33,6 @@ class _FoodPageBodyState extends State<FoodPageBody> {
     pageController.addListener(() {
       setState(() {
         _currPageVal = pageController.page!;
-        print("current Value is" + _currPageVal.toString());
-        print(MediaQuery.of(context).size.width.toString());
       });
     });
   }
@@ -292,7 +290,7 @@ class _FoodPageBodyState extends State<FoodPageBody> {
                   fit: BoxFit.cover,
                   image: NetworkImage(AppConstants.BASE_URL +
                       AppConstants.UPLOADS +
-                      popularProduct.img!),
+                      popularProduct.img),
                 ),
               ),
             ),

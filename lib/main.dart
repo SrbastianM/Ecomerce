@@ -1,5 +1,6 @@
 import 'package:eccommerce/controller/popular_product_controller.dart';
 import 'package:eccommerce/controller/recommended_product_controller.dart';
+import 'package:eccommerce/pages/cart/cart_page.dart';
 import 'package:eccommerce/routes/route_helper.dart';
 import 'package:eccommerce/utils/app_constants.dart';
 import 'package:flutter/material.dart';

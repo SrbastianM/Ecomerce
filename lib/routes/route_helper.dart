@@ -1,3 +1,4 @@
+import 'package:eccommerce/pages/cart/cart_page.dart';
 import 'package:eccommerce/pages/food/popular_food_datail.dart';
 import 'package:eccommerce/pages/food/recommended_food_detail.dart';
 import 'package:eccommerce/pages/home/main_food_page.dart';
@@ -7,11 +8,13 @@ class RouteHelper {
   static String initial = "/";
   static String popularFood = "/popular-food";
   static String recommendedFood = "/recommended-food";
+  static String cartPage = "/shop-cart";
 
   static String getInitial() => '$initial';
   static String getPopularFood(int index) => '$popularFood?index=$index';
   static String getRecommendedFood(int index) =>
       '$recommendedFood?index=$index';
+  static String getCartPage(int index) => '$cartPage?index=$index';
 
   static List<GetPage> routes = [
     GetPage(
@@ -35,5 +38,12 @@ class RouteHelper {
           return RecommendedFoodDetail(pageId: int.parse(pageId!));
         },
         transition: Transition.fadeIn),
+    // GetPage(
+    //     name: cartPage,
+    //     page: () {
+    //       var pageId = Get.parameters['index'];
+    //       return CartPage(pageId: int.parse(pageId!));
+    //     },
+    //     transition: Transition.fadeIn),
   ];
 }
