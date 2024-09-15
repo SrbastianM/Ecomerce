@@ -1,8 +1,7 @@
 import 'package:eccommerce/controller/popular_product_controller.dart';
-import 'package:eccommerce/pages/food/popular_food_datail.dart';
-import 'package:eccommerce/pages/food/recommended_food_detail.dart';
-import 'package:eccommerce/pages/home/food_page_body.dart';
-import 'package:eccommerce/pages/home/main_food_page.dart';
+import 'package:eccommerce/controller/recommended_product_controller.dart';
+import 'package:eccommerce/routes/route_helper.dart';
+import 'package:eccommerce/utils/app_constants.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'helper/dependencies.dart' as dep;
@@ -20,12 +19,12 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Get.find<PopularProductController>().getPopularProductList();
+    Get.find<RecommendedProductController>().getRecommendedProductList();
     return GetMaterialApp(
-        debugShowCheckedModeBanner: false,
-        title: 'Flutter Demo',
-        theme: ThemeData(
-          primarySwatch: Colors.blue,
-        ),
-        home: const MainFoodPage());
+      debugShowCheckedModeBanner: false,
+      title: AppConstants.APP_NAME,
+      initialRoute: RouteHelper.initial,
+      getPages: RouteHelper.routes,
+    );
   }
 }

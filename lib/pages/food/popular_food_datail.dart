@@ -1,8 +1,12 @@
+import 'package:eccommerce/controller/popular_product_controller.dart';
+import 'package:eccommerce/routes/route_helper.dart';
+import 'package:eccommerce/utils/app_constants.dart';
 import 'package:eccommerce/utils/dimensions.dart';
 import 'package:eccommerce/widgets/app_column.dart';
 import 'package:eccommerce/widgets/app_icon.dart';
 import 'package:eccommerce/widgets/expandable_text.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import '../../utils/app_colors.dart';
 import '../../widgets/big_text.dart';
@@ -10,12 +14,13 @@ import '../../widgets/icon_and_text.dart';
 import '../../widgets/small_text.dart';
 
 class PopularFoodDetail extends StatelessWidget {
-  const PopularFoodDetail({
-    super.key,
-  });
+  int pageId;
+  PopularFoodDetail({super.key, required this.pageId});
 
   @override
   Widget build(BuildContext context) {
+    var product =
+        Get.find<PopularProductController>().popularProductList[pageId];
     return Scaffold(
       backgroundColor: Colors.white,
       body: Stack(
@@ -29,7 +34,9 @@ class PopularFoodDetail extends StatelessWidget {
               height: Dimensions.popularFoodImgSize,
               decoration: BoxDecoration(
                 image: DecorationImage(
-                    image: AssetImage("asset/images/omg.png"),
+                    image: NetworkImage(AppConstants.BASE_URL +
+                        AppConstants.UPLOADS +
+                        product.img),
                     fit: BoxFit.cover),
               ),
             ),
@@ -42,10 +49,18 @@ class PopularFoodDetail extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                AppIcon(
-                  icon: Icons.arrow_back_ios,
+                GestureDetector(
+                  onTap: () {
+                    Get.toNamed(RouteHelper.getInitial());
+                  },
+                  child: AppIcon(
+                    icon: Icons.arrow_back_ios,
+                  ),
                 ),
-                AppIcon(icon: Icons.shopping_cart_outlined)
+                GestureDetector(
+                  onTap: () {},
+                  child: AppIcon(icon: Icons.shopping_cart_outlined),
+                )
               ],
             ),
           ),
@@ -72,7 +87,7 @@ class PopularFoodDetail extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   AppColumn(
-                    text: "Sex with grandMotehr",
+                    text: product.name!,
                   ),
                   SizedBox(
                     height: Dimensions.height20,
@@ -83,9 +98,7 @@ class PopularFoodDetail extends StatelessWidget {
                   ),
                   Expanded(
                     child: SingleChildScrollView(
-                      child: ExpandableText(
-                          text:
-                              "Hoy, yo quiero coger una loqueraCoger una loqueraGuayar por to'a la discoGuayar por to'a la discoGuayar, guayar(Ay, estoy bien loca con la nota en high)Guayar, guayar(Ay, hoy yo no llego a casa de mi ma'i)Ly-Ly-Ly-Ly (guayar)Tú estás chuckyCara linda, a vece' es media putiTu gato te dejó sola en la disco (¿qué?)¡Cabrón, qué rookie!Ponte en cuatro, menea las nalga'Se ve el gistro debajo de la faldaEn sacármela no se tardaSiempre dulce, nunca sabe amargaBotó al novio, prefiere estar solteraEse phillie nunca se queda afueraSiempre con los condone' en la carteraDe las hija de puta, fue la primera, yeah-yeah (Ra-Rauw)Hoy, yo me escapoY me invento un túnel como El ChapoElla quiere amarrarse a un cacoDe Carolina, un bellaco natoYo que falle, dudosoEsta noche, ando peligrosoElla no es mi esposa, pero la esposoMe lo vio y dijo: ¡Ay, qué venoso! (¡Wow, baby!)Hoy, yo quiero coger una loqueraCoger una loqueraGuayar por to'a la discoGuayar por to'a la discoGuayar, guayar(Ay, estoy bien loca con la nota en high)Guayar, guaar(Ay, hoy yo no llego a casa de mi ma'i)A mal momento, buena notaNo me responsabilizo cuando me explotaVoy pa' encimota, chúpame como una gotaY tú si fuera' Viña del Mar, ya tengo to'a las gaviota'Una que se va, y otras bendiciones que lleganHoy quiero una perra que lo mueva como MeganAquí misionamo' y la data no se riega (no)Chambonean, pero no me matan, como OmegaNecesitaba tiempo del que tengoDe todo me aburro, y con nada me entretengoBajando la 1942 sin dividendoNo viven su vida, y yo los entiendoMirando de los bleachers, mi ex de meticheQuiere que me encapriche, pa' que me la chiche, chicheHace tiempo le apagué el switcheNo es que sea pitcher, es que prefiero bad bitches, qué berrinche (sheesh)Estoy puesto pa' coger una nota cabronaExplotar la cuenta y perrearme una culonaDespertar en ite', no te uite'Somo' unos bellacos(Calloway)Hoy, yo quiero coger una loqueraCoger una loqueraGuayar por to'a la discoGuayar por to'a la discoGuayar, guayar(Ay, estoy bien loca con la nota en high)Guayar, guayar(Ay, hoy yo no llego a casa de mi ma'i)Ly-Ly-Ly-Ly (guayar)Tú estás chuckyCara linda, a vece' es media putiTu gato te dejó sola en la disco (¿qué?)¡Cabrón, qué rookie!Ponte en cuatro, menea las nalga'Se ve el gistro debajo de la faldaEn sacármela no se tardaSiempre dulce, nunca sabe amargaBotó al novio, prefiere estar solteraEse phillie nunca se  una gotaY tú si fuera' Viña del Mar, ya tengo to'a las gaviota'Una que se va, y otras bendiciones que lleganHoy quiero una perra que lo mueva como MeganAquí misionamo' y la data no se riega (no)Chambonean, pero no me matan, como OmegaNecesitaba tiempo del que tengoDe todo me aburro, y con nada me entretengoBajando la 1942 sin dividendoNo viven su vida, y yo los entiendoMirando de los bleachers, mi ex de meticheQuiere que me encapriche, pa' que me la chiche, chicheHace tiempo le apagué el switcheNo es que sea pitcher, es que prefiero bad bitches, qué berrinche (sheesh)Estoy puesto pa' coger una nota cabronaExplotar la cuenta y perrearme una culonaDespertar en otra cama que no sea la míaY mandé al carajo a mi ex, si es tremenda porqueríaGua-Guayar(Ay, un perreo con Lyanno, Rauw y Brray)Gua-Guayar, guayar(Ay, vamo' pa' la cama, dime, ¿qué hay?)Ey, no te quite'No te quite', no te uite'Somo' unos bellacos(Calloway)Hoy, yo quiero coger una loqueraCoger una loqueraGuayar por to'a la discoGuayar por to'a la discoGuayar, guayar(Ay, estoy bien loca con la nota en high)Guayar, guayar(Ay, hoy yo no llego a casa de mi ma'i)Ly-Ly-Ly-Ly (guayar)Tú estás chuckyCara linda, a vece' es media putiTu gato te dejó sola en la disco (¿qué?)¡Cabrón, qué rookie!Ponte en cuatro, menea las nalga'Se ve el gistro debajo de la faldaEn sacármela no se tardaSiempre dulce, nunca sabe amargaBotó al novio, prefiere estar solteraEse phillie nunca se queda afueraSiempre con los condone' en la carteraDe las hija de puta, fue la primera, yeah-yeah (Ra-Rauw)Hoy, yo me escapoY me invento un túnel como El ChapoElla quiere amarrarse a un cacoDe Carolina, un bellaco natoYo que falle, dudosoEsta noche, ando peligrosoElla no es mi esposa, pero la esposoMe lo vio y dijo: ¡Ay, qué venoso! (¡Wow, baby!)Hoy, yo quiero coger una loqueraCoger una loqueraGuayar por to'a la discoGuayar por to'a la discoGuayar, guayar(Ay, estoy bien loca con la nota en high)Guayar, guaar(Ay, hoy yo no llego a casa de mi ma'i)A mal momento, buena notaNo me responsabilizo cuando me explotaVoy pa' encimota, chúpame como una gotaY tú si fuera' Viña del Mar, ya tengo to'a las gaviota'Una que se va, y otras bendiciones que lleganHoy quiero una perra que lo mueva como MeganAquí misionamo' y la data no se riega (no)Chambonean, pero no me matan, como OmegaNecesitaba tiempo del que tengoDe todo me aburro, y con nada me entretengoBajando la 1942 sin dividendoNo viven su vida, y yo los entiendoMirando de los bleachers, mi ex de meticheQuiere que me encapriche, pa' que me la chiche, chicheHace tiempo le apagué el switcheNo es que sea pitcher, es que prefiero bad bitches, qué berrinche (sheesh)Estoy puesto pa' coger una nota cabronaExplotar la cuenta y perrearme una culonaDespertar en otra cama que no sea la míaY mandé al carajo a mi ex, si es tremenda porqueríaGua-Guayar(Ay, un perreo con Lyanno, Rauw y Brray)Gua-Guayar, guayar(Ay, vamo' pa' la cama, dime, ¿qué hay?)Ey, no te quite'No te quite', no te uite'Somo' unos bellacos(Calloway)"),
+                      child: ExpandableText(text: product.description!),
                     ),
                   ),
                 ],
@@ -154,7 +167,7 @@ class PopularFoodDetail extends StatelessWidget {
                 right: Dimensions.width20,
               ),
               child: BigText(
-                text: "\$10 | Add to cart",
+                text: "\$ ${product.price!} | Add to cart",
                 color: Colors.white,
               ),
               decoration: BoxDecoration(

@@ -7,4 +7,5 @@ class AppConstants {
   static const String RECOMENDED_PRODUCT_URI = "/api/v1/products/recommended";
 
   static const String TOKEN = "";
+  static const String UPLOADS = "/uploads/";
 }

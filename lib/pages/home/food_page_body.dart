@@ -1,6 +1,9 @@
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:eccommerce/controller/popular_product_controller.dart';
+import 'package:eccommerce/controller/recommended_product_controller.dart';
 import 'package:eccommerce/models/products_model.dart';
+import 'package:eccommerce/pages/food/popular_food_datail.dart';
+import 'package:eccommerce/routes/route_helper.dart';
 import 'package:eccommerce/utils/app_colors.dart';
 import 'package:eccommerce/utils/app_constants.dart';
 import 'package:eccommerce/utils/dimensions.dart';
@@ -51,13 +54,18 @@ class _FoodPageBodyState extends State<FoodPageBody> {
             return popularProducts.isLoaded
                 ? Container(
                     height: Dimensions.pageView,
-                    child: PageView.builder(
-                      controller: pageController,
-                      itemCount: popularProducts.popularProductList.length,
-                      itemBuilder: ((context, index) {
-                        return _buildPageItem(
-                            index, popularProducts.popularProductList[index]);
-                      }),
+                    child: GestureDetector(
+                      onTap: () {
+                        Get.toNamed(RouteHelper.popularFood);
+                      },
+                      child: PageView.builder(
+                        controller: pageController,
+                        itemCount: popularProducts.popularProductList.length,
+                        itemBuilder: ((context, index) {
+                          return _buildPageItem(
+                              index, popularProducts.popularProductList[index]);
+                        }),
+                      ),
                     ),
                   )
                 : CircularProgressIndicator(
@@ -114,89 +122,109 @@ class _FoodPageBodyState extends State<FoodPageBody> {
           ),
         ),
         //Recycler view List
-        ListView.builder(
-          shrinkWrap: true,
-          physics: const NeverScrollableScrollPhysics(),
-          itemCount: 10,
-          itemBuilder: (context, index) {
-            return Container(
-              margin: EdgeInsets.only(
-                left: Dimensions.width20,
-                right: Dimensions.width20,
-                bottom: Dimensions.height10,
-              ),
-              child: Row(
-                children: [
-                  Container(
-                    width: Dimensions.listViewImg,
-                    height: Dimensions.listViewImg,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(
-                        Dimensions.radius20,
-                      ),
-                      color: Colors.white38,
-                      image: DecorationImage(
-                        fit: BoxFit.cover,
-                        image: AssetImage("asset/images/omg.png"),
-                      ),
-                    ),
-                  ),
-                  Expanded(
-                    child: Container(
-                      height: Dimensions.listViewTextContSize,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.only(
-                          topRight: Radius.circular(Dimensions.radius20),
-                          bottomRight: Radius.circular(Dimensions.radius20),
+        GetBuilder<RecommendedProductController>(builder: (recommended) {
+          return recommended.isLoaded
+              ? ListView.builder(
+                  shrinkWrap: true,
+                  physics: const NeverScrollableScrollPhysics(),
+                  itemCount: recommended.recommendedProductList.length,
+                  itemBuilder: (context, index) {
+                    return GestureDetector(
+                      onTap: () {
+                        Get.toNamed(RouteHelper.getRecommendedFood(index));
+                      },
+                      child: Container(
+                        margin: EdgeInsets.only(
+                          left: Dimensions.width20,
+                          right: Dimensions.width20,
+                          bottom: Dimensions.height10,
                         ),
-                        color: Colors.white,
-                      ),
-                      child: Padding(
-                        padding: EdgeInsets.only(
-                          left: Dimensions.width10,
-                          right: Dimensions.width10,
-                        ),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.center,
+                        child: Row(
                           children: [
-                            BigText(
-                              text: "Testing shit asf im bored",
+                            Container(
+                              width: Dimensions.listViewImg,
+                              height: Dimensions.listViewImg,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(
+                                  Dimensions.radius20,
+                                ),
+                                color: Colors.white38,
+                                image: DecorationImage(
+                                  fit: BoxFit.cover,
+                                  image: NetworkImage(AppConstants.BASE_URL +
+                                      AppConstants.UPLOADS +
+                                      recommended
+                                          .recommendedProductList[index].img!),
+                                ),
+                              ),
                             ),
-                            SizedBox(
-                              height: Dimensions.height10,
-                            ),
-                            SmallText(text: "Some mother fucker testing "),
-                            SizedBox(
-                              height: Dimensions.height10,
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                IconAndText(
-                                    icon: Icons.circle_sharp,
-                                    text: "Normal",
-                                    iconColor: AppColors.iconColor1),
-                                IconAndText(
-                                    icon: Icons.location_on,
-                                    text: "1.7 km",
-                                    iconColor: AppColors.mainColor),
-                                IconAndText(
-                                    icon: Icons.access_time_rounded,
-                                    text: "32 min",
-                                    iconColor: AppColors.iconColor2)
-                              ],
+                            Expanded(
+                              child: Container(
+                                height: Dimensions.listViewTextContSize,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.only(
+                                    topRight:
+                                        Radius.circular(Dimensions.radius20),
+                                    bottomRight:
+                                        Radius.circular(Dimensions.radius20),
+                                  ),
+                                  color: Colors.white,
+                                ),
+                                child: Padding(
+                                  padding: EdgeInsets.only(
+                                    left: Dimensions.width10,
+                                    right: Dimensions.width10,
+                                  ),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      BigText(
+                                        text: recommended
+                                            .recommendedProductList[index]
+                                            .name!,
+                                      ),
+                                      SizedBox(
+                                        height: Dimensions.height10,
+                                      ),
+                                      SmallText(text: "Description Test"),
+                                      SizedBox(
+                                        height: Dimensions.height10,
+                                      ),
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          IconAndText(
+                                              icon: Icons.circle_sharp,
+                                              text: "Normal",
+                                              iconColor: AppColors.iconColor1),
+                                          IconAndText(
+                                              icon: Icons.location_on,
+                                              text: "1.7 km",
+                                              iconColor: AppColors.mainColor),
+                                          IconAndText(
+                                              icon: Icons.access_time_rounded,
+                                              text: "32 min",
+                                              iconColor: AppColors.iconColor2)
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
                             ),
                           ],
                         ),
                       ),
-                    ),
-                  ),
-                ],
-              ),
-            );
-          },
-        ),
+                    );
+                  },
+                )
+              : CircularProgressIndicator(
+                  color: AppColors.mainColor,
+                );
+        })
       ],
     );
   }
@@ -232,34 +260,40 @@ class _FoodPageBodyState extends State<FoodPageBody> {
       transform: matrix,
       child: Stack(
         children: [
-          Container(
-            height: Dimensions.pageViewContainer,
-            margin: EdgeInsets.only(
-              left: Dimensions.width10,
-              right: Dimensions.width10,
-            ),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(Dimensions.radius20),
-              color: index.isEven ? Color(0xFF69c5df) : Color(0xFF9294cc),
-              boxShadow: const [
-                BoxShadow(
-                  color: Color(0xFFe8e8e8),
-                  blurRadius: 5.0,
-                  offset: Offset(0, 5),
+          GestureDetector(
+            onTap: () {
+              Get.toNamed(RouteHelper.getPopularFood(index));
+            },
+            child: Container(
+              height: Dimensions.pageViewContainer,
+              margin: EdgeInsets.only(
+                left: Dimensions.width10,
+                right: Dimensions.width10,
+              ),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(Dimensions.radius20),
+                color: index.isEven ? Color(0xFF69c5df) : Color(0xFF9294cc),
+                boxShadow: const [
+                  BoxShadow(
+                    color: Color(0xFFe8e8e8),
+                    blurRadius: 5.0,
+                    offset: Offset(0, 5),
+                  ),
+                  BoxShadow(
+                    color: Colors.white,
+                    offset: Offset(-5, 0),
+                  ),
+                  BoxShadow(
+                    color: Colors.white,
+                    offset: Offset(5, 0),
+                  ),
+                ],
+                image: DecorationImage(
+                  fit: BoxFit.cover,
+                  image: NetworkImage(AppConstants.BASE_URL +
+                      AppConstants.UPLOADS +
+                      popularProduct.img!),
                 ),
-                BoxShadow(
-                  color: Colors.white,
-                  offset: Offset(-5, 0),
-                ),
-                BoxShadow(
-                  color: Colors.white,
-                  offset: Offset(5, 0),
-                ),
-              ],
-              image: DecorationImage(
-                fit: BoxFit.cover,
-                image: NetworkImage(
-                    AppConstants.BASE_URL + "/uploads/" + popularProduct.img!),
               ),
             ),
           ),
