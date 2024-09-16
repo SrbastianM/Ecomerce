@@ -42,7 +42,12 @@ class RecommendedFoodDetail extends StatelessWidget {
                   return Stack(
                     children: [
                       GestureDetector(
-                        onTap: () {},
+                        onTap: () {
+                          if (controller.totalItems >= 1) {
+                            Get.toNamed(RouteHelper.getCartPage());
+                          }
+                          ;
+                        },
                         child: AppIcon(icon: Icons.shopping_cart_outlined),
                       ),
                       Get.find<PopularProductController>().totalItems >= 1
